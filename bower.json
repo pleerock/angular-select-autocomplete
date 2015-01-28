@@ -1,0 +1,39 @@
+{
+  "name": "angular-select-autocomplete",
+  "description": "Angular autocomplete",
+  "version": "0.0.1",
+  "keywords": ["angular-autocomplete", "select-autocomplete", "angular-select-autocomplete"],
+  "authors": [
+    { "name": "Umed Khudoiberdiev", "email": "info@zar.tj" }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PLEEROCK/angular-select-autocomplete.git"
+  },
+  "main": [
+    "./dist/angular-select-autocomplete.js",
+    "./dist/angular-select-autocomplete.css"
+  ],
+  "ignore": [
+    ".gitignore",
+    ".jshintrc",
+    "package.json",
+    "gulpfile.js",
+    "node_modules",
+    "bower_components",
+    "src",
+    "reports",
+    "samples",
+    "test"
+  ],
+  "dependencies": {
+    "angular": ">= 1.0.8",
+    "angular-sanitize": ">= 1.0.8",
+    "angular-select-items": "latest",
+    "angular-open-dropdown": "latest"
+  },
+  "devDependencies": {
+    "angular-mocks": ">= 1.0.8",
+    "angular-scenario": ">= 1.0.8"
+  }
+}

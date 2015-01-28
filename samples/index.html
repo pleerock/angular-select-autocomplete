@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>select-autocomplete sample</title>
+
+    <link rel="stylesheet" href="../../open-dropdown/src/open-dropdown.css"/>
+    <link rel="stylesheet" href="../../select-items/dist/angular-select-items.css"/>
+    <link rel="stylesheet" href="../src/select-autocomplete.css"/>
+
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../../auto-grow-input/dist/angular-auto-grow-input.js"></script>
+    <script src="../../select-options/dist/angular-select-options.js"></script>
+    <script src="../../disable-all/dist/angular-disable-all.js"></script>
+    <script src="../../open-dropdown/src/open-dropdown.js"></script>
+    <script src="../../select-items/dist/angular-select-items.js"></script>
+    <script src="selectAutocompleteSample.js"></script>
+
+    <script src="../src/selectAutocomplete.js"></script>
+    <script src="../src/select-autocomplete.js"></script>
+
+    <style>
+
+        h1 i{ font-size: 12px; font-weight: normal; font-style: italic; color: #ffa82f; }
+        .custom-selected { background: #ffa82f; }
+        .custom-item:hover { background: #eee; }
+        .custom-item { cursor: pointer; }
+
+    </style>
+
+</head>
+<body ng-app="selectAutocompleteSample" ng-controller="SelectAutocompleteSampleCtrl">
+
+    <!-- =================================================================== -->
+
+    <h1>Basic usage (single select):</h1>
+
+    <select-autocomplete
+            ng-model="selectedUser"
+            select-options="user.name for user in users">
+    </select-autocomplete>
+
+    <br/>
+    Selected user is: <b>{{ selectedUser.name }}</b><br/>
+    Model: <small>{{ selectedUser }}</small><br/>
+
+    <!-- =================================================================== -->
+
+    <h1>Disabled:</h1>
+
+    <select-autocomplete
+            disabled="disabled"
+            ng-model="selectedUser"
+            select-options="user.name for user in users">
+    </select-autocomplete>
+
+    <button ng-click="disabled = !disabled">enable / disable it</button>
+
+    <!-- =================================================================== -->
+
+    <h1>With limited number of items in the dropdown:</h1>
+
+    <select-autocomplete
+            dropdown-show-limit="4"
+            ng-model="selectedUser"
+            select-options="user.name for user in users">
+    </select-autocomplete>
+
+    <!-- =================================================================== -->
+
+    <h1>Select item with auto selected first item: <i>only single select</i></h1>
+
+    <select-autocomplete select-options="user.name for user in users"
+                         ng-model="defaultSelectedUser"
+                         auto-select="true">
+    </select-autocomplete>
+
+    <br/>
+    Selected user is: <b>{{ defaultSelectedUser.name }}</b><br/>
+    Model: <small>{{ defaultSelectedUser }}</small><br/>
+
+    <!-- =================================================================== -->
+
+    <h1>Multiselect with hidden "no selection" label</h1>
+
+    <select-autocomplete select-options="user.name for user in users"
+                  ng-model="selectedUser"
+                  hide-no-selection="true">
+    </select-autocomplete>
+
+    <br/>
+    Selected user is: <b>{{ selectedUser.name }}</b><br/>
+    Model: <small>{{ selectedUser }}</small><br/>
+
+    <!-- =================================================================== -->
+
+    <h1>With ordered items</h1>
+
+    <select-autocomplete select-options="user.name for user in users order by name"
+                  ng-model="selectedUser">
+    </select-autocomplete>
+
+    <br/>
+    Selected user is: <b>{{ selectedUser.name }}</b><br/>
+    Model: <small>{{ selectedUser }}</small><br/>
+
+    <!-- =================================================================== -->
+
+    <h1>Select object partitions</h1>
+
+    <select-autocomplete select-options="user.name as user.name for user in users"
+                  ng-model="selectedUserName">
+    </select-autocomplete>
+
+    <br/>
+    Selected user is: <b>{{ selectedUserName }}</b><br/>
+    Model: <small>{{ selectedUserName }}</small><br/>
+
+    <!-- =================================================================== -->
+
+    <h1>Example with custom filter</h1>
+
+    <select-autocomplete select-options="user.name for user in users"
+                  ng-model="selectedUser"
+                  filters="[customFilter]">
+    </select-autocomplete>
+
+    <br/>
+    Selected user is: <b>{{ selectedUser.name }}</b><br/>
+    Model: <small>{{ selectedUser }}</small><br/>
+
+    <!-- =================================================================== -->
+
+    <h1>Example with custom dropdown decorator</h1>
+
+    <select-autocomplete select-options="user.name for user in users"
+                  ng-model="selectedUser"
+                  dropdown-item-decorator="dropdownItemDecorator">
+    </select-autocomplete>
+
+    <br/>
+    Selected user is: <b>{{ selectedUser.name }}</b><br/>
+    Model: <small>{{ selectedUser }}</small><br/>
+
+    <!-- =================================================================== -->
+
+    <h1>Using ng-change to run a callback when model is changing</h1>
+
+    <select-autocomplete select-options="user.name for user in users"
+                  ng-model="selectedUser"
+                  on-change="changed(selectedUser)">
+    </select-autocomplete>
+
+    <br/>
+    Is $scope.changed called: <b>{{ isChangedCalled ? 'yes' : 'no' }}</b><br/>
+
+    <!-- =================================================================== -->
+
+    <h1>Example with remote items with lazy load (items are loaded after clicking on input)</h1>
+
+    <select-autocomplete ng-model="loadedRepository"
+                     lazy-load="true"
+                     loading-label="Please wait, loading repositories..."
+                     load-promise="loadGithubRepositories"
+                     select-options="repository.name for repository in repositories track by repository.url">
+    </select-autocomplete>
+
+    <br/>
+    Selected user is: <b>{{ loadedRepository.name }}</b><br/>
+    Model: <small>{{ loadedRepository }}</small><br/>
+
+    <!-- =================================================================== -->
+
+    <h1>Select dropdown with custom template</h1>
+
+    <select-autocomplete select-options="user.name for user in users"
+                     ng-model="selectedUser">
+
+        <div class="custom-item"
+             ng-repeat="user in getDisplayedItems()"
+             ng-click="selectItem(user)"
+             ng-class="{ 'custom-selected': isItemSelected(user) }">
+            <h1>{{ user.name }}</h1>
+            <div>
+                Email: {{ user.email }}
+                Group: {{ user.group }}
+            </div>
+        </div>
+
+    </select-autocomplete>
+
+    <br/>
+    Selected user is: <b>{{ selectedUser.name }}</b><br/>
+    Model: <small>{{ selectedUser }}</small><br/>
+
+    <!-- =================================================================== -->
+
+</body>
+</html>
