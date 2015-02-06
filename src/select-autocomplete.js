@@ -81,6 +81,7 @@
                     '<open-dropdown class="open-dropdown" ',
                                     'disabled="' + attrs.disabled + '"',
                                     'tabindex="3" ',
+                                    'fit-width-to-attached-container="true"',
                                     'for="' + id + '" ',
                                     'is-opened="' + id + '.isOpened">',
                        '<select-items class="select-items"',
