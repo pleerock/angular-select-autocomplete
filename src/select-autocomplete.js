@@ -72,7 +72,7 @@
                 var id = 'select_autocomplete_' + s4() + '_' + s4() + '_' + s4();
                 var html = element.html().trim();
 
-                return ['<div class="select-dropdown" ng-class="{ \'disabled\': ' + id + '.isDisabled }" data-id="' + id + '">',
+                return ['<div class="select-autocomplete" ng-class="{ \'disabled\': ' + id + '.isDisabled }" data-id="' + id + '">',
                     '<input id="' + id + '" style="display: block"',
                             'class="select-autocomplete-input"',
                             'ng-model="' + id + '.userInputText"',

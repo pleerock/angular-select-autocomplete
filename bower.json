@@ -1,7 +1,7 @@
 {
   "name": "angular-select-autocomplete",
   "description": "Angular autocomplete",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": ["angular-autocomplete", "select-autocomplete", "angular-select-autocomplete"],
   "authors": [
     { "name": "Umed Khudoiberdiev", "email": "info@zar.tj" }
