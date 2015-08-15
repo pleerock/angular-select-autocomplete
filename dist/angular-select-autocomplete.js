@@ -253,6 +253,13 @@
                         });
                     }
                 };
+
+                scope.$watch(function() {
+                    return ngModelCtrl.$modelValue;
+                }, function(model) {
+                    if (model)
+                        scope[id].userInputText = scope.getItemName(model);
+                });
             }
         };
     }
