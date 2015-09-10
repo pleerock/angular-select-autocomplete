@@ -89,6 +89,7 @@
 
                 return ['<div class="select-autocomplete" ng-class="{ \'disabled\': ' + id + '.isDisabled }" data-id="' + id + '">',
                     '<input id="' + id + '" style="display: block"',
+                            attrs.placeholder ? 'placeholder="' + attrs.placeholder + '"' : '',
                             'class="select-autocomplete-input"',
                             'ng-model="' + id + '.userInputText"',
                             'ng-change="' + id + '.change()"',
